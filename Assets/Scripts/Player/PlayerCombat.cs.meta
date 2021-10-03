@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: cf8dbf587abf6934f8416a5b78028811
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - defaultShuriken: {fileID: 11400000, guid: 74b7dc384ae256c48913abfa8645d064, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
