@@ -19,10 +19,10 @@ public class StandingEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider hitInfo)
     {
-        PlayerCombat PC = hitInfo.GetComponent<PlayerCombat>();
-        if (PC != null && currentCooldown <= 0)
+        PlayerHealth PH = hitInfo.GetComponent<PlayerHealth>();
+        if (PH != null && currentCooldown <= 0)
         {
-            PC.TakeDamage(10);
+            PH.TakeDamage(10);
             currentCooldown = attackCooldown;
         }
     }

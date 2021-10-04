@@ -5,7 +5,7 @@ public class Shuriken : ScriptableObject
 {
     public new string name;
     
-    public GameObject gameObj;
+    public GameObject model;
     public float damage;
     public float speed;
 }

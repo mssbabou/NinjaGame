@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     public float MoveSpeed = 6f;
     public float SprintSpeed = 12f;
     public float jumpForce = 10f;
-    public float LookSensitivity = 0.001f;
     public int jumpAmount = 2;
     
     [Space(10)]
@@ -26,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     CharacterController controller;
     PlayerAnimator PA;
-    PlayerCameraController PCC;
+    ThirdPersonCameraController PCC;
     float gravity = -9.81f;
     float turnSmoothVelocity;
     bool isGrounded = true;
@@ -40,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         PA = GetComponent<PlayerAnimator>();
-        PCC = GetComponent<PlayerCameraController>();
+        PCC = GetComponent<ThirdPersonCameraController>();
         
         gravity *= gravityMultiplier;
         

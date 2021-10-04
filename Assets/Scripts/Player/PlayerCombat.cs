@@ -11,17 +11,18 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask playerLayer;
     public Int16 itemSlot = 1;
 
-    public float health = 100;
-
     private PlayerMovement PM;
+    private ThirdPersonCameraController PCC;
+    public GameObject ShurikenObject;
     private ShurikenScript SS;
-    private PlayerCameraController PCC;
+    private GameObject ShurikenGFX;
 
     void Start()
     {
-        SS = defaultShuriken.gameObj.GetComponent<ShurikenScript>();
-        PCC = GetComponent<PlayerCameraController>();
+        PCC = GetComponent<ThirdPersonCameraController>();
         PM = GetComponent<PlayerMovement>();
+        SS = ShurikenObject.GetComponent<ShurikenScript>();
+        ShurikenGFX = GetComponentInChildren<GameObject>();
     }
     
     void Update()
@@ -39,7 +40,7 @@ public class PlayerCombat : MonoBehaviour
         
         if (itemSlot == 1)
         { 
-            PCC.IsShoulder = false;
+            PCC.OverShoulder = false;
             if (Input.GetButtonDown("Fire1"))
             {
                 //HIT
@@ -48,11 +49,12 @@ public class PlayerCombat : MonoBehaviour
         
         if (itemSlot == 2)
         {
-            PCC.IsShoulder = true;
+            PCC.OverShoulder = true;
             if (Input.GetButtonDown("Fire1"))
             {
                 SS.speed = defaultShuriken.speed;
                 SS.damage = defaultShuriken.damage;
+                ShurikenGFX = defaultShuriken.model;
                 
                 RaycastHit hit;
                 if (Physics.Raycast(PCC.cam.transform.position, PCC.cam.transform.forward, out hit, 1000f))
@@ -65,19 +67,9 @@ public class PlayerCombat : MonoBehaviour
                     HoldingPoint.rotation = PCC.cam.transform.rotation;
                 }
 
-                Instantiate(defaultShuriken.gameObj, HoldingPoint.position, HoldingPoint.rotation);
+                Instantiate(ShurikenObject, HoldingPoint.position, HoldingPoint.rotation);
             }
 
         }
-    }
-
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-    }
-
-    public void Heal(float healing)
-    {
-        health += Mathf.Clamp(healing, 0, 100);
     }
 }

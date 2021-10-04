@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ShurikenTestObject
   m_EditorClassIdentifier: 
   name: TestShuriken
-  gameObj: {fileID: 2033373625021938233, guid: 3896e1c018fc8824b828b10c7e76abc5, type: 3}
+  model: {fileID: 919132149155446097, guid: c68519ce681898b49a5dbdded93c535d, type: 3}
   damage: 10
-  speed: 0.5
+  speed: 0.1
