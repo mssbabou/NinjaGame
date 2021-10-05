@@ -15,24 +15,22 @@ public class PlayerCombat : MonoBehaviour
     private ThirdPersonCameraController PCC;
     public GameObject ShurikenObject;
     private ShurikenScript SS;
-    private GameObject ShurikenGFX;
 
     void Start()
     {
         PCC = GetComponent<ThirdPersonCameraController>();
         PM = GetComponent<PlayerMovement>();
         SS = ShurikenObject.GetComponent<ShurikenScript>();
-        ShurikenGFX = GetComponentInChildren<GameObject>();
     }
     
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(UnityEngine.Input.GetKeyDown(KeyCode.Alpha1))
         {
             itemSlot = 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha2))
         {
             itemSlot = 2;
         }
@@ -41,7 +39,7 @@ public class PlayerCombat : MonoBehaviour
         if (itemSlot == 1)
         { 
             PCC.OverShoulder = false;
-            if (Input.GetButtonDown("Fire1"))
+            if (UnityEngine.Input.GetButtonDown("Fire1"))
             {
                 //HIT
             }
@@ -50,12 +48,11 @@ public class PlayerCombat : MonoBehaviour
         if (itemSlot == 2)
         {
             PCC.OverShoulder = true;
-            if (Input.GetButtonDown("Fire1"))
+            if (UnityEngine.Input.GetButtonDown("Fire1"))
             {
                 SS.speed = defaultShuriken.speed;
                 SS.damage = defaultShuriken.damage;
-                ShurikenGFX = defaultShuriken.model;
-                
+
                 RaycastHit hit;
                 if (Physics.Raycast(PCC.cam.transform.position, PCC.cam.transform.forward, out hit, 1000f))
                 {
