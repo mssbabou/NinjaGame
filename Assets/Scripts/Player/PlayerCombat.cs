@@ -15,14 +15,12 @@ public class PlayerCombat : MonoBehaviour
     private ThirdPersonCameraController PCC;
     public GameObject ShurikenObject;
     private ShurikenScript SS;
-    private GameObject ShurikenGFX;
 
     void Start()
     {
         PCC = GetComponent<ThirdPersonCameraController>();
         PM = GetComponent<PlayerMovement>();
         SS = ShurikenObject.GetComponent<ShurikenScript>();
-        ShurikenGFX = GetComponentInChildren<GameObject>();
     }
     
     void Update()
@@ -54,8 +52,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 SS.speed = defaultShuriken.speed;
                 SS.damage = defaultShuriken.damage;
-                ShurikenGFX = defaultShuriken.model;
-                
+
                 RaycastHit hit;
                 if (Physics.Raycast(PCC.cam.transform.position, PCC.cam.transform.forward, out hit, 1000f))
                 {
