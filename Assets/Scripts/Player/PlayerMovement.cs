@@ -27,41 +27,37 @@ public class PlayerMovement : MonoBehaviour
     PlayerAnimator PA;
     ThirdPersonCameraController PCC;
     float gravity = -9.81f;
+    float newGravity;
     float turnSmoothVelocity;
     float moveSmoothVelocity;
     float targetAngle;
     float anglef;
     bool isGrounded = true;
-    Vector3 hitNormal;
     Vector3 direction;
     Vector3 velocity;
     Vector2 look;
     int jumpsLeft;
     float speed;
     
+    
     void Start()
     {
         controller = GetComponent<CharacterController>();
         PA = GetComponent<PlayerAnimator>();
         PCC = GetComponent<ThirdPersonCameraController>();
-        
-        gravity *= gravityMultiplier;
-        
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        hitNormal = hit.normal;
-        Debug.Log(hitNormal);
-    }
-
     void Update()
     {
+        newGravity = gravity * gravityMultiplier;
         
-        
-        
+        RaycastHit groundHit;
+        Physics.Raycast(transform.position, Vector3.down, out groundHit, groundDistance);
+        float groundHitAngle = Vector3.Angle(Vector3.up, groundHit.normal);
+
         // Check if player is grounded
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (isGrounded && velocity.y < 0)
@@ -69,7 +65,6 @@ public class PlayerMovement : MonoBehaviour
             jumpsLeft = jumpAmount;
             velocity.y = -2f;
         }
-        
 
         // Move with old Input system
         direction.x = UnityEngine.Input.GetAxisRaw("Horizontal");
@@ -90,10 +85,7 @@ public class PlayerMovement : MonoBehaviour
             speed = Mathf.SmoothDamp(speed, 0f, ref moveSmoothVelocity, MoveAcceleration);
         }
 
-        if (speed < 0.2f)
-        {
-            speed = 0;
-        }
+        speed = speed < 0.002f ? 0f : speed;
         
         
         if (direction.magnitude >= 0.1f)
@@ -107,7 +99,6 @@ public class PlayerMovement : MonoBehaviour
         
         // Apply Rotation
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        Debug.Log(speed);
         controller.Move(moveDir.normalized * speed * Time.deltaTime);
 
         // Jump when "Jump" and "isGrounded" with jumpForce
@@ -128,14 +119,14 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
         }
         
+        
         // Fall based on gravity
-        velocity.y += gravity * Time.deltaTime;
+        velocity.y += newGravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
         if (velocity.y <= 5)
         {
             //Play falling animation
         }
-        
     }
     
     void OnDrawGizmos()
