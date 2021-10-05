@@ -1070,7 +1070,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435895772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.886, z: 0}
+  m_LocalPosition: {x: 0, y: -1.016, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1563886597}
@@ -3127,7 +3127,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404099670}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.55200005, y: 0.19200003, z: 0.39100003}
+  m_LocalPosition: {x: 0.395, y: -0.195, z: 0.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1563886597}
@@ -3584,7 +3584,7 @@ MonoBehaviour:
   jumpAmount: 2
   turnSmoothTime: 0.1
   gravityMultiplier: 2
-  groundDistance: 0.25
+  groundDistance: 0.2
 --- !u!143 &1563886595
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4260,6 +4260,10 @@ PrefabInstance:
     - target: {fileID: 7232709300091563871, guid: c336e8e25eebb1d449d6b972552d87f2, type: 3}
       propertyPath: m_Name
       value: Goodwall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232709300091563871, guid: c336e8e25eebb1d449d6b972552d87f2, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7232709300091563871, guid: c336e8e25eebb1d449d6b972552d87f2, type: 3}
       propertyPath: m_TagString
