@@ -58,8 +58,8 @@ public class ThirdPersonCameraController : MonoBehaviour
         }
         
         // Get player input
-        look.x = Input.GetAxisRaw("Mouse X");
-        look.y = Input.GetAxisRaw("Mouse Y");
+        look.x = UnityEngine.Input.GetAxisRaw("Mouse X");
+        look.y = UnityEngine.Input.GetAxisRaw("Mouse Y");
         
         angle.x += look.x * Sensitivity.x;
         angle.y += look.y * Sensitivity.y;

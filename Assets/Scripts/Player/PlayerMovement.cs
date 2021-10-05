@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(CharacterController))]
@@ -51,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Change speed with sprint
         speed = MoveSpeed;
-        if (Input.GetButton("Sprint"))
+        if (UnityEngine.Input.GetButton("Sprint"))
         {
             speed = SprintSpeed;
         }
@@ -67,8 +66,8 @@ public class PlayerMovement : MonoBehaviour
         
 
         // Move with old Input system
-        direction.x = Input.GetAxisRaw("Horizontal");
-        direction.z = Input.GetAxisRaw("Vertical");
+        direction.x = UnityEngine.Input.GetAxisRaw("Horizontal");
+        direction.z = UnityEngine.Input.GetAxisRaw("Vertical");
         direction = direction.normalized;
         
         if (direction.magnitude >= 0.1f)
@@ -84,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Jump when "Jump" and "isGrounded" with jumpForce
-        if (jumpsLeft >= 1 && Input.GetButtonDown("Jump"))
+        if (jumpsLeft >= 1 && UnityEngine.Input.GetButtonDown("Jump"))
         {
             // Double jump animation
             if (jumpsLeft < jumpAmount)

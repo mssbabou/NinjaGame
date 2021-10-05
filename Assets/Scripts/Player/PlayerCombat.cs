@@ -27,12 +27,12 @@ public class PlayerCombat : MonoBehaviour
     
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(UnityEngine.Input.GetKeyDown(KeyCode.Alpha1))
         {
             itemSlot = 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha2))
         {
             itemSlot = 2;
         }
@@ -41,7 +41,7 @@ public class PlayerCombat : MonoBehaviour
         if (itemSlot == 1)
         { 
             PCC.OverShoulder = false;
-            if (Input.GetButtonDown("Fire1"))
+            if (UnityEngine.Input.GetButtonDown("Fire1"))
             {
                 //HIT
             }
@@ -50,7 +50,7 @@ public class PlayerCombat : MonoBehaviour
         if (itemSlot == 2)
         {
             PCC.OverShoulder = true;
-            if (Input.GetButtonDown("Fire1"))
+            if (UnityEngine.Input.GetButtonDown("Fire1"))
             {
                 SS.speed = defaultShuriken.speed;
                 SS.damage = defaultShuriken.damage;
