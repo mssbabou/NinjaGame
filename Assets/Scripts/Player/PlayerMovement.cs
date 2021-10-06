@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
     public Transform groundCheck;
@@ -53,10 +52,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         newGravity = gravity * gravityMultiplier;
-        
-        RaycastHit groundHit;
-        Physics.Raycast(transform.position, Vector3.down, out groundHit, groundDistance);
-        float groundHitAngle = Vector3.Angle(Vector3.up, groundHit.normal);
 
         // Check if player is grounded
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -127,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //Play falling animation
         }
+    
     }
     
     void OnDrawGizmos()
