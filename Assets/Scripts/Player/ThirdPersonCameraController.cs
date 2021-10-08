@@ -9,6 +9,7 @@ public class ThirdPersonCameraController : MonoBehaviour
 {
     [HideInInspector] public Camera cam;
     [HideInInspector] public bool OverShoulder;
+    public LayerMask playerLayer;
     [Space(5)]
     public GameObject Crosshair;
     public Transform CameraFollow;
@@ -77,7 +78,14 @@ public class ThirdPersonCameraController : MonoBehaviour
         RaycastHit CameraHit;
         if (Physics.Raycast(CameraLookAt.position, rayDir, out CameraHit, rayDir.magnitude))
         {
-            cam.transform.position = CameraHit.point + (-rayDir * 0.1f);
+            if (!CameraHit.collider.CompareTag("Player"))
+            {
+                cam.transform.position = CameraHit.point + (-rayDir * 0.1f);   
+            }
+            else
+            {
+                cam.transform.position = CameraDestination.position;
+            }
         }
         else
         {
