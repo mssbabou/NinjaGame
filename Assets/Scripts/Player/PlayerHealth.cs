@@ -5,25 +5,25 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public HealthBar healthBar;
-    public float MaxHealth = 100;
-    public float Health;
+    public float maxHealth = 100;
+    public float health;
     
     // Start is called before the first frame update
     void Start()
     {
-        Health = MaxHealth;
-        healthBar.SetMaxHealth(MaxHealth);
+        health = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     public void TakeDamage(float damage)
     {
-        Health -= damage;
-        healthBar.SetHealth(Health);
+        health = Mathf.Clamp(health - damage, 0, maxHealth);
+        healthBar.SetHealth(health);
     }
 
     public void Heal(float healing)
     {
-        Health += Mathf.Clamp(healing, 0, 100);
-        healthBar.SetHealth(Health);
+        health = Mathf.Clamp(health + healing, 0, maxHealth);
+        healthBar.SetHealth(health);
     }
 }
