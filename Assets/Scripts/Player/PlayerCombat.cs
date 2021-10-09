@@ -10,18 +10,21 @@ public class PlayerCombat : MonoBehaviour
     [Space(5)]
     public GameObject shurikenObject;
     public Shuriken shuriken;
-    public float drawTimeThreshold = 0.2f;
     [Space(5)]
     public Katana defaultKatana;
-    
+
     private PlayerMovement PM;
     private ThirdPersonCameraController TPCC;
     private ShurikenScript SS;
-    
+        
+    // Shuriken
     [Space(20)]
-    [SerializeField] private float drawPercent;
-    [SerializeField] private float drawTime;
-    [SerializeField] private float timeWhenDraw; 
+    private float drawPercent;
+    private float drawTime;
+    private float timeWhenDraw;
+    
+    
+    // Katana
     
     void Start()
     {
@@ -49,7 +52,7 @@ public class PlayerCombat : MonoBehaviour
     void KatanaMode()
     {
         TPCC.OverShoulder = false;
-        if (UnityEngine.Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             //HIT
         }
@@ -58,7 +61,7 @@ public class PlayerCombat : MonoBehaviour
     void ShurikenMode()
     {
         TPCC.OverShoulder = true;
-        if (UnityEngine.Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             timeWhenDraw = Time.time;
         }
@@ -67,9 +70,7 @@ public class PlayerCombat : MonoBehaviour
         {
             SS.speed = shuriken.speed * drawPercent;
             SS.damage = shuriken.damage * drawPercent;
-            
-            Debug.Log(shuriken.speed * drawPercent);
-            
+
             RaycastHit hit;
             if (Physics.Raycast(TPCC.cam.transform.position, TPCC.cam.transform.forward, out hit, 1000f))
             {
@@ -81,7 +82,7 @@ public class PlayerCombat : MonoBehaviour
             }
 
             Instantiate(shurikenObject, HoldingPoint.position, HoldingPoint.rotation);
-            
+
             drawTime = 0f;
             drawPercent = 0f;
             timeWhenDraw = 0f;

@@ -120,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += newGravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
+        PA.isGrounded = isGrounded;
         PA.fallingSpeed = velocity.y;
     }
     

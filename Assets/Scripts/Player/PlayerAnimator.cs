@@ -9,8 +9,11 @@ public class PlayerAnimator : MonoBehaviour
     Animator animator;
     public float speed;
     public float fallingSpeed;
+    public bool isGrounded;
+    
     private int SpeedHash;
     private int FallingSpeedHash;
+    private int isGroundedHash;
 
     void Start()
     {
@@ -18,12 +21,16 @@ public class PlayerAnimator : MonoBehaviour
 
         SpeedHash = Animator.StringToHash("Speed");
         FallingSpeedHash = Animator.StringToHash("FallingSpeed");
+        isGroundedHash = Animator.StringToHash("IsGrounded");
     }
 
     void Update()
     {
+        fallingSpeed = Mathf.Clamp(fallingSpeed, float.NegativeInfinity, 0);
+        
         animator.SetFloat(SpeedHash, speed);
         animator.SetFloat(FallingSpeedHash, fallingSpeed);
+        animator.SetBool(isGroundedHash, isGrounded);
     }
 
     public void DoubleJumpAnim()
