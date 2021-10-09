@@ -28,12 +28,12 @@ public class PlayerAnimator : MonoBehaviour
 
     public void DoubleJumpAnim()
     {
-        // Player DoubleJump
+        animator.Play("Armature_001|Idle");
     }
 
     public void JumpAnim()
     {
-        
+        animator.Play("Armature_001|Idle");
     }
 
     public void KatanaHitAnim()

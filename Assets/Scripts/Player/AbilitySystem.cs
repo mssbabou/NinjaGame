@@ -31,12 +31,24 @@ public class AbilitySystem : MonoBehaviour
     void ApplyAbilities()
     {
         if (Abilities["tripleJump"].Equals(true))
-        { PM.jumpAmount = 3; }
-        else { PM.jumpAmount = 2; }
+        {
+            PM.jumpAmount = 3;
+        }
+        else
+        {
+            PM.jumpAmount = 2;
+        }
 
         if (Abilities["megaSpeed"].Equals(true))
-        { PM.MoveSpeed = 15f; PM.SprintSpeed = 30f; }
-        else { PM.MoveSpeed = defaultMoveSpeed; PM.SprintSpeed = defaultSprintSpeed; }
+        {
+            PM.MoveSpeed = 6f; 
+            PM.SprintSpeed = 12f;
+        }
+        else
+        {
+            PM.MoveSpeed = defaultMoveSpeed; 
+            PM.SprintSpeed = defaultSprintSpeed;
+        }
     }
 
     public List<string> GetAbilitiesLeft()
