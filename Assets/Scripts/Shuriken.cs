@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Shuriken", menuName = "Weapon/Shuriken")]
 public class Shuriken : ScriptableObject
 {
+    public string type;
     public new string name;
     
     public GameObject model;

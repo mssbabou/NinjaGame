@@ -77,7 +77,6 @@ public class PlayerCombat : MonoBehaviour
             }
             else
             {
-                
                 HoldingPoint.rotation = TPCC.cam.transform.rotation;
             }
 

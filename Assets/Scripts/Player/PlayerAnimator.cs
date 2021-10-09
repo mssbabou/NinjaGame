@@ -35,4 +35,14 @@ public class PlayerAnimator : MonoBehaviour
     {
         
     }
+
+    public void KatanaHitAnim()
+    {
+        
+    }
+
+    public void ShurikenThrowAnim()
+    {
+        
+    }
 }
