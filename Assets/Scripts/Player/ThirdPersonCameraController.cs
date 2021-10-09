@@ -9,7 +9,7 @@ public class ThirdPersonCameraController : MonoBehaviour
 {
     [HideInInspector] public Camera cam;
     [HideInInspector] public bool OverShoulder;
-    public LayerMask playerLayer;
+    public LayerMask GroundLayer;
     [Space(5)]
     public GameObject Crosshair;
     public Transform CameraFollow;
@@ -18,7 +18,7 @@ public class ThirdPersonCameraController : MonoBehaviour
     [Space(10)]
     public Vector2 DampRotation;
     [Space(10)]
-    public Vector3 OffsetPostion = new Vector3(0f, 4f, -8.5f);
+    public float CameraDistance = 9f;
     [Range(-5, 5)] public float Side;
 
     [Space(5)] 
@@ -69,14 +69,14 @@ public class ThirdPersonCameraController : MonoBehaviour
         angleDst.x = Mathf.SmoothDampAngle(angleDst.x, angle.x, ref SmoothAngle.x, DampRotation.x);
         angleDst.y = Mathf.SmoothDampAngle(angleDst.y, angle.y, ref SmoothAngle.y, DampRotation.y);
         
-        CameraDestination.localPosition = OffsetPostion;  
+        CameraDestination.localPosition = new Vector3(0f, 0f, -CameraDistance);  
         CameraFollow.eulerAngles = new Vector3(0f, angleDst.x, 0f);
         CameraLookAt.localEulerAngles = new Vector3(-angleDst.y, 0f, 0f);
         CameraDestination.LookAt(CameraLookAt);
         
         Vector3 rayDir = CameraDestination.position - CameraLookAt.position;
         RaycastHit CameraHit;
-        if (Physics.Raycast(CameraLookAt.position, rayDir, out CameraHit, rayDir.magnitude))
+        if (Physics.Raycast(CameraLookAt.position, rayDir, out CameraHit, rayDir.magnitude, GroundLayer))
         {
             if (!CameraHit.collider.CompareTag("Player"))
             {

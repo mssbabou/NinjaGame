@@ -5,68 +5,95 @@ using System;
 
 public class PlayerCombat : MonoBehaviour
 {
-    public Transform HoldingPoint;
-    public Shuriken defaultShuriken;
-    public Katana defaultKatana;
-    public LayerMask playerLayer;
+    public Transform HoldingPoint;    
     public Int16 itemSlot = 1;
-
+    [Space(5)]
+    public GameObject shurikenObject;
+    public Shuriken shuriken;
+    public float drawTimeThreshold = 0.2f;
+    [Space(5)]
+    public Katana defaultKatana;
+    
     private PlayerMovement PM;
-    private ThirdPersonCameraController PCC;
-    public GameObject ShurikenObject;
+    private ThirdPersonCameraController TPCC;
     private ShurikenScript SS;
-
+    
+    [Space(20)]
+    [SerializeField] private float drawPercent;
+    [SerializeField] private float drawTime;
+    [SerializeField] private float timeWhenDraw; 
+    
     void Start()
     {
-        PCC = GetComponent<ThirdPersonCameraController>();
+        TPCC = GetComponent<ThirdPersonCameraController>();
         PM = GetComponent<PlayerMovement>();
-        SS = ShurikenObject.GetComponent<ShurikenScript>();
+        SS = shurikenObject.GetComponent<ShurikenScript>();
     }
     
     void Update()
     {
-        if(UnityEngine.Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            itemSlot = 1;
-        }
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { itemSlot = 1; }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) { itemSlot = 2; }
 
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            itemSlot = 2;
-        }
-        
-        
         if (itemSlot == 1)
         { 
-            PCC.OverShoulder = false;
-            if (UnityEngine.Input.GetButtonDown("Fire1"))
-            {
-                //HIT
-            }
+            KatanaMode();
         }
         
         if (itemSlot == 2)
         {
-            PCC.OverShoulder = true;
-            if (UnityEngine.Input.GetButtonDown("Fire1"))
-            {
-                SS.speed = defaultShuriken.speed;
-                SS.damage = defaultShuriken.damage;
-
-                RaycastHit hit;
-                if (Physics.Raycast(PCC.cam.transform.position, PCC.cam.transform.forward, out hit, 1000f))
-                {
-                    HoldingPoint.LookAt(hit.point);   
-                }
-                else
-                {
-                    
-                    HoldingPoint.rotation = PCC.cam.transform.rotation;
-                }
-
-                Instantiate(ShurikenObject, HoldingPoint.position, HoldingPoint.rotation);
-            }
-
+            ShurikenMode();
         }
     }
+
+    void KatanaMode()
+    {
+        TPCC.OverShoulder = false;
+        if (UnityEngine.Input.GetButtonDown("Fire1"))
+        {
+            //HIT
+        }
+    }
+    
+    void ShurikenMode()
+    {
+        TPCC.OverShoulder = true;
+        if (UnityEngine.Input.GetButtonDown("Fire1"))
+        {
+            timeWhenDraw = Time.time;
+        }
+
+        if (Input.GetButtonUp("Fire1"))
+        {
+            SS.speed = shuriken.speed * drawPercent;
+            SS.damage = shuriken.damage * drawPercent;
+            
+            Debug.Log(shuriken.speed * drawPercent);
+            
+            RaycastHit hit;
+            if (Physics.Raycast(TPCC.cam.transform.position, TPCC.cam.transform.forward, out hit, 1000f))
+            {
+                HoldingPoint.LookAt(hit.point);   
+            }
+            else
+            {
+                
+                HoldingPoint.rotation = TPCC.cam.transform.rotation;
+            }
+
+            Instantiate(shurikenObject, HoldingPoint.position, HoldingPoint.rotation);
+            
+            drawTime = 0f;
+            drawPercent = 0f;
+            timeWhenDraw = 0f;
+        }
+            
+        if (Input.GetButton("Fire1"))
+        {
+            drawTime = Time.time - timeWhenDraw + shuriken.maxDrawTime / 2f;
+            drawPercent = drawTime / shuriken.maxDrawTime;
+            drawPercent = Mathf.Clamp(drawPercent, 0f, 1f);
+        }
+    }
+    
 }

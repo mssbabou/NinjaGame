@@ -119,11 +119,8 @@ public class PlayerMovement : MonoBehaviour
         // Fall based on gravity
         velocity.y += newGravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-        if (velocity.y <= 5)
-        {
-            //Play falling animation
-        }
-    
+
+        PA.fallingSpeed = velocity.y;
     }
     
     void OnDrawGizmos()

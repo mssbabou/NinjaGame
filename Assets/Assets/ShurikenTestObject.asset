@@ -16,3 +16,4 @@ MonoBehaviour:
   model: {fileID: 919132149155446097, guid: c68519ce681898b49a5dbdded93c535d, type: 3}
   damage: 10
   speed: 0.1
+  maxDrawTime: 3

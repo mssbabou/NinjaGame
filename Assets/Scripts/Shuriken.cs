@@ -8,4 +8,5 @@ public class Shuriken : ScriptableObject
     public GameObject model;
     public float damage;
     public float speed;
+    public float maxDrawTime;
 }
