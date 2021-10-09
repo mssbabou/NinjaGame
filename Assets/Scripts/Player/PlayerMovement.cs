@@ -62,12 +62,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Move with old Input system
-        direction.x = UnityEngine.Input.GetAxisRaw("Horizontal");
-        direction.z = UnityEngine.Input.GetAxisRaw("Vertical");
+        direction.x = Input.GetAxisRaw("Horizontal");
+        direction.z = Input.GetAxisRaw("Vertical");
         direction = direction.normalized;
         
         // Change speed with sprint
-        if (UnityEngine.Input.GetButton("Sprint") && direction.magnitude >= 0.1f)
+        if (Input.GetButton("Sprint") && direction.magnitude >= 0.1f)
         {
             speed = Mathf.SmoothDamp(speed, SprintSpeed, ref moveSmoothVelocity, MoveAcceleration);
         }

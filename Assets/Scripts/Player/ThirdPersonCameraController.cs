@@ -66,6 +66,8 @@ public class ThirdPersonCameraController : MonoBehaviour
         angle.y += look.y * Sensitivity.y;
         angle.y = Mathf.Clamp(angle.y, ClampY.y, ClampY.x);
 
+        angleDst = angle;
+
         CameraDestination.localPosition = new Vector3(0f, 0f, -CameraDistance);  
         CameraFollow.eulerAngles = new Vector3(0f, angleDst.x, 0f);
         CameraLookAt.localEulerAngles = new Vector3(-angleDst.y, 0f, 0f);
