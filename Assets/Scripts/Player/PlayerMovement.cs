@@ -95,7 +95,8 @@ public class PlayerMovement : MonoBehaviour
         // Apply Rotation
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         controller.Move(moveDir.normalized * speed * Time.deltaTime);
-
+        PA.speed = speed;
+        
         // Jump when "Jump" and "isGrounded" with jumpForce
         if (jumpsLeft >= 1 && UnityEngine.Input.GetButtonDown("Jump"))
         {

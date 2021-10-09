@@ -7,17 +7,24 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     Animator animator;
-    public bool isWalking = false;
-    public bool isRunning = false;
+    public float speed;
+    private int SpeedHash;
 
     void Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
+
+        SpeedHash = Animator.StringToHash("Speed");
+    }
+
+    void Update()
+    {
+        animator.SetFloat(SpeedHash, speed);
     }
 
     public void DoubleJumpAnim()
     {
-        animator.Play("Player Flip");
+        // Player DoubleJump
     }
 
     public void JumpAnim()
