@@ -22,18 +22,17 @@ public class ShurikenScript : MonoBehaviour
     private Vector3 velocity;
     private Vector3 RotVelocity;
     private float timeWhenSpawned;
-    
+
     private void Start()
     {
         timeWhenSpawned = Time.time;
-        gfxTransform = this.gameObject.transform.GetChild(0).transform;
         velocity = new Vector3(0f, 0f, speed);
+        gfxTransform = transform.GetChild(0).transform;
         RotVelocity = new Vector3(0f, 0f, rotationSpeed);
     }
 
     private void FixedUpdate()
     {
-        
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, speed * 5))
         {

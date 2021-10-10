@@ -62,12 +62,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Move with old Input system
-        direction.x = UnityEngine.Input.GetAxisRaw("Horizontal");
-        direction.z = UnityEngine.Input.GetAxisRaw("Vertical");
+        direction.x = Input.GetAxisRaw("Horizontal");
+        direction.z = Input.GetAxisRaw("Vertical");
         direction = direction.normalized;
         
         // Change speed with sprint
-        if (UnityEngine.Input.GetButton("Sprint") && direction.magnitude >= 0.1f)
+        if (Input.GetButton("Sprint") && direction.magnitude >= 0.1f)
         {
             speed = Mathf.SmoothDamp(speed, SprintSpeed, ref moveSmoothVelocity, MoveAcceleration);
         }
@@ -95,7 +95,8 @@ public class PlayerMovement : MonoBehaviour
         // Apply Rotation
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         controller.Move(moveDir.normalized * speed * Time.deltaTime);
-
+        PA.speed = speed;
+        
         // Jump when "Jump" and "isGrounded" with jumpForce
         if (jumpsLeft >= 1 && UnityEngine.Input.GetButtonDown("Jump"))
         {
@@ -118,11 +119,9 @@ public class PlayerMovement : MonoBehaviour
         // Fall based on gravity
         velocity.y += newGravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-        if (velocity.y <= 5)
-        {
-            //Play falling animation
-        }
-    
+
+        PA.isGrounded = isGrounded;
+        PA.fallingSpeed = velocity.y;
     }
     
     void OnDrawGizmos()

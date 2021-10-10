@@ -10,6 +10,9 @@ public class AbilitySystem : MonoBehaviour
     private PlayerCombat PC;
     private PlayerMovement PM;
 
+    public float defaultMoveSpeed = 6f;
+    public float defaultSprintSpeed = 12f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,12 +31,24 @@ public class AbilitySystem : MonoBehaviour
     void ApplyAbilities()
     {
         if (Abilities["tripleJump"].Equals(true))
-        { PM.jumpAmount = 3; }
-        else { PM.jumpAmount = 2; }
+        {
+            PM.jumpAmount = 3;
+        }
+        else
+        {
+            PM.jumpAmount = 2;
+        }
 
         if (Abilities["megaSpeed"].Equals(true))
-        { PM.MoveSpeed = 15f; PM.SprintSpeed = 30f; }
-        else { PM.MoveSpeed = 6f; PM.SprintSpeed = 12f; }
+        {
+            PM.MoveSpeed = 6f; 
+            PM.SprintSpeed = 12f;
+        }
+        else
+        {
+            PM.MoveSpeed = defaultMoveSpeed; 
+            PM.SprintSpeed = defaultSprintSpeed;
+        }
     }
 
     public List<string> GetAbilitiesLeft()
