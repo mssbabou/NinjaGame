@@ -27,7 +27,7 @@ public class ShurikenScript : MonoBehaviour
     {
         timeWhenSpawned = Time.time;
         velocity = new Vector3(0f, 0f, speed);
-        gfxTransform = GetComponentInChildren<Transform>();
+        gfxTransform = transform.GetChild(0).transform;
         RotVelocity = new Vector3(0f, 0f, rotationSpeed);
     }
 
