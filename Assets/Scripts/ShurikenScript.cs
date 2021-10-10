@@ -12,6 +12,7 @@ public class ShurikenScript : MonoBehaviour
     public float damage;
 
     private Transform gfxTransform;
+    public GameObject trail;
     private Rigidbody RB;
     
     private float rotationSpeed = 10f;
@@ -26,9 +27,11 @@ public class ShurikenScript : MonoBehaviour
     private void Start()
     {
         timeWhenSpawned = Time.time;
+        trail.SetActive(true);
         velocity = new Vector3(0f, 0f, speed);
         gfxTransform = transform.GetChild(0).transform;
         RotVelocity = new Vector3(0f, 0f, rotationSpeed);
+        trail.transform.localScale = new Vector3(trail.transform.localScale.x, trail.transform.localScale.y, speed*2f);
     }
 
     private void FixedUpdate()
@@ -73,6 +76,7 @@ public class ShurikenScript : MonoBehaviour
     {
         velocity = Vector3.zero;
         RotVelocity = Vector3.zero;
+        trail.SetActive(false);
         Destroy(gameObject, destroyDelay);
     }
 
