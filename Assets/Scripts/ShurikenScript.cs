@@ -16,8 +16,8 @@ public class ShurikenScript : MonoBehaviour
     private Rigidbody RB;
     
     private float rotationSpeed = 1f;
-    private float destroyDelay = 50f;
-    private float lifeTime = 100f;
+    private float destroyDelay = 5f;
+    private float lifeTime = 10f;
 
     [SerializeField] 
     private Transform trailModelTransform;

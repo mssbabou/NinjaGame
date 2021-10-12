@@ -78,10 +78,9 @@ public class PlayerCombat : MonoBehaviour
             {
                 HoldingPoint.rotation = TPCC.cam.transform.rotation;
             }
-
             
             PM.targetAngle = HoldingPoint.eulerAngles.y;
-            
+
             SpawnShuriken(shuriken, drawPercent);
 
             drawTime = 0f;
