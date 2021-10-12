@@ -68,8 +68,6 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetButtonUp("Fire1"))
         {
-            SS.speed = shuriken.speed * drawPercent;
-            SS.damage = shuriken.damage * drawPercent;
 
             RaycastHit hit;
             if (Physics.Raycast(TPCC.cam.transform.position, TPCC.cam.transform.forward, out hit, 1000f))
@@ -81,7 +79,7 @@ public class PlayerCombat : MonoBehaviour
                 HoldingPoint.rotation = TPCC.cam.transform.rotation;
             }
 
-            Instantiate(shurikenObject, HoldingPoint.position, HoldingPoint.rotation);
+            SpawnShuriken(shuriken, drawPercent);
 
             drawTime = 0f;
             drawPercent = 0f;
@@ -94,6 +92,15 @@ public class PlayerCombat : MonoBehaviour
             drawPercent = drawTime / shuriken.maxDrawTime;
             drawPercent = Mathf.Clamp(drawPercent, 0f, 1f);
         }
+    }
+
+    void SpawnShuriken(Shuriken _shuriken, float _statMultiplier)
+    {
+        SS.speed = _shuriken.speed * _statMultiplier;
+        SS.damage = _shuriken.damage * _statMultiplier;
+        SS.model = _shuriken.model;
+
+        Instantiate(shurikenObject, HoldingPoint.position, HoldingPoint.rotation);
     }
     
 }
