@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
     public Transform HoldingPoint;    
-    public Int16 itemSlot = 1;
+    public int itemSlot = 1;
     [Space(5)]
     public GameObject shurikenObject;
     public Shuriken shuriken;
@@ -37,6 +38,9 @@ public class PlayerCombat : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1)) { itemSlot = 1; }
         if (Input.GetKeyDown(KeyCode.Alpha2)) { itemSlot = 2; }
+        itemSlot += (int)Mathf.Ceil(Input.mouseScrollDelta.y);
+        itemSlot = Mathf.Clamp(itemSlot, 1, 2);
+
 
         if (itemSlot == 1)
         { 
