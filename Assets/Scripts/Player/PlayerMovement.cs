@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     float newGravity;
     float turnSmoothVelocity;
     float moveSmoothVelocity;
-    float targetAngle;
+    [HideInInspector] public float targetAngle;
     float anglef;
     bool isGrounded = true;
     Vector3 direction;
@@ -87,10 +87,10 @@ public class PlayerMovement : MonoBehaviour
         {
             // Rotate with camera
             targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + PCC.cam.transform.eulerAngles.y;
-            anglef = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, anglef, 0f);
-            
         }
+        
+        anglef = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+        transform.rotation = Quaternion.Euler(0f, anglef, 0f);
         
         // Apply Rotation
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
