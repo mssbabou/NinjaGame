@@ -23,15 +23,21 @@ public class PlayerCombat : MonoBehaviour
     private float drawPercent;
     private float drawTime;
     private float timeWhenDraw;
-    
-    
+
+
     // Katana
-    
+    private BoxCollider KatanaHit;
+    private List<EnemyHealth> enemies = new List<EnemyHealth>();
+    private float cooldown;
+
     void Start()
     {
         TPCC = GetComponent<ThirdPersonCameraController>();
         PM = GetComponent<PlayerMovement>();
         SS = shurikenObject.GetComponent<ShurikenScript>();
+
+        //Katana
+        cooldown = defaultKatana.attackSpeed;
     }
     
     void Update()
@@ -51,14 +57,23 @@ public class PlayerCombat : MonoBehaviour
         {
             ShurikenMode();
         }
+
+        if (cooldown > 0)
+        {
+            cooldown -= Time.deltaTime;
+        }
     }
 
     void KatanaMode()
     {
         TPCC.OverShoulder = false;
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && enemies.Count > 0 && cooldown <= 0)
         {
-            //HIT
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].TakeDamage(defaultKatana.damage);
+            }
+            cooldown = defaultKatana.attackSpeed;
         }
     }
     
@@ -108,5 +123,21 @@ public class PlayerCombat : MonoBehaviour
 
         Instantiate(shurikenObject, HoldingPoint.position, HoldingPoint.rotation);
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            enemies.Add(other.gameObject.GetComponent<EnemyHealth>());
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            enemies.Remove(other.gameObject.GetComponent<EnemyHealth>());
+        }
+    }
+
 }

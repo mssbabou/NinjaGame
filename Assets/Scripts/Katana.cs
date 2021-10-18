@@ -6,7 +6,7 @@
     {
         public new string name;
     
-        public GameObject gameObj;
+        public GameObject katanaModel;
         public float damage;
         public float range;
         public float attackSpeed; 
