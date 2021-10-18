@@ -1895,6 +1895,7 @@ GameObject:
   - component: {fileID: 1563886591}
   - component: {fileID: 1563886600}
   - component: {fileID: 1563886596}
+  - component: {fileID: 1563886601}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1947,7 +1948,7 @@ MonoBehaviour:
   itemSlot: 1
   shurikenObject: {fileID: 491883315503021739, guid: 3896e1c018fc8824b828b10c7e76abc5, type: 3}
   shuriken: {fileID: 11400000, guid: deb060599e2075940b575ca2a67e5f3b, type: 2}
-  defaultKatana: {fileID: 0}
+  defaultKatana: {fileID: 11400000, guid: 06ac741cedd8d2f41886a0c9ba49e2a3, type: 2}
 --- !u!114 &1563886594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2081,6 +2082,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f1cd84d57bc8749a6524044cc716dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1563886601
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563886590}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.75, z: 1.2}
+  m_Center: {x: 0, y: 0.15, z: 0.8}
 --- !u!1 &1611370081
 GameObject:
   m_ObjectHideFlags: 0
@@ -2094,13 +2108,27 @@ GameObject:
   - component: {fileID: 1611370088}
   - component: {fileID: 1611370084}
   - component: {fileID: 1611370086}
+  - component: {fileID: 1611370082}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
+--- !u!65 &1611370082
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611370081}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &1611370083
 Rigidbody:
   m_ObjectHideFlags: 0
