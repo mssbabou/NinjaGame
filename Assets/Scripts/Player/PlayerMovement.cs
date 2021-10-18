@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     float newGravity;
     float turnSmoothVelocity;
     float moveSmoothVelocity;
-    [HideInInspector] public float targetAngle;
+    public float targetAngle;
     float anglef;
     bool isGrounded = true;
     Vector3 direction;
@@ -44,9 +44,6 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         PA = GetComponent<PlayerAnimator>();
         PCC = GetComponent<ThirdPersonCameraController>();
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     void Update()

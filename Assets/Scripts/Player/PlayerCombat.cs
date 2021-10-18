@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.Mathematics;
 using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
@@ -48,7 +49,11 @@ public class PlayerCombat : MonoBehaviour
         }
         
         if (itemSlot == 2)
-        {
+        {/*
+            if (Input.GetButton("Fire1"))
+            {
+                SpawnShuriken(shuriken, 1f);
+            }*/
             ShurikenMode();
         }
     }
@@ -105,8 +110,11 @@ public class PlayerCombat : MonoBehaviour
         SS.speed = _shuriken.speed * _statMultiplier;
         SS.damage = _shuriken.damage * _statMultiplier;
         SS.model = _shuriken.model;
+        
+        SS.velocity = HoldingPoint.forward;
+        SS.modelRotation = new Vector3(0f, HoldingPoint.eulerAngles.y + 90f, 0f);
 
-        Instantiate(shurikenObject, HoldingPoint.position, HoldingPoint.rotation);
+        Instantiate(shurikenObject, HoldingPoint.position, quaternion.identity);
     }
     
 }
