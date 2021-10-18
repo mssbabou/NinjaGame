@@ -47,4 +47,3 @@ MonoBehaviour:
   damage: 53.58734
   model: {fileID: 919132149155446097, guid: c68519ce681898b49a5dbdded93c535d, type: 3}
   trailModel: {fileID: 7190846222844054779, guid: 34af360580e1c6c468fc88a885b6e12b, type: 3}
-  trailModelTransform: {fileID: 0}
